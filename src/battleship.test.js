@@ -32,4 +32,52 @@ describe("Gameboard class", () => {
     expect(gameboard.grid[0].length).toBe(10);
     expect(gameboard.grid[9][9]).toEqual({ shipIndex: -1, status: "none" });
   });
+
+  describe("addShip(ship)", () => {
+    const gameboard = new Gameboard();
+
+    test("successful addShip(ship)", () => {
+      const ship1 = new Ship({ x: 0, y: 0 }, 3, true);
+      gameboard.addShip(ship1);
+      expect(gameboard.unplacedShips).toEqual([null, 4, 2, 2, 1]);
+      expect(gameboard.placedShips).toEqual([ship1]);
+
+      const ship2 = new Ship({ x: 2, y: 0 }, 4, false);
+      gameboard.addShip(ship2);
+      expect(gameboard.unplacedShips).toEqual([null, 4, 2, 2, 0]);
+      expect(gameboard.placedShips).toEqual([ship1, ship2]);
+      
+      const ship3 = new Ship({ x: 0, y: 4 }, 3, true);
+      gameboard.addShip(ship3);
+      expect(gameboard.unplacedShips).toEqual([null, 4, 2, 0, 0]);
+      expect(gameboard.placedShips).toEqual([ship1, ship2, ship3]);
+    });
+
+    test("attempt to place ship with invalid length", () => {
+      const ship1 = new Ship({ x: 2, y: 2 }, 5, false);
+      expect(() => gameboard.addShip(ship1)).toThrow(
+        "Ship length must be between 1 and 4.",
+      );
+
+      const ship2 = new Ship({ x: 2, y: 2 }, 0, false);
+      expect(() => gameboard.addShip(ship2)).toThrow(
+        "Ship length must be between 1 and 4.",
+      );
+    });
+
+    test("attempt to place too many ships of a certain length", () => {
+      const ship1 = new Ship({ x: 2, y: 2 }, 4, false);
+      expect(() => gameboard.addShip(ship1)).toThrow(
+        "Can't place any more ships of that length.",
+      );
+
+      const ship2 = new Ship({ x: 2, y: 2 }, 3, false);
+      expect(() => gameboard.addShip(ship2)).toThrow(
+        "Can't place any more ships of that length.",
+      );
+    });
+
+    // Ships can't touch each other.
+    // Ship must be within bounds.
+  });
 });
