@@ -1,4 +1,4 @@
-import { Ship } from "./battleship";
+import { Ship, Gameboard } from "./battleship";
 
 describe("Ship class", () => {
   test("new Ship(position, length, vertical)", () => {
@@ -20,5 +20,16 @@ describe("Ship class", () => {
     expect(ship.isSunk()).toBe(false);
     ship.hit();
     expect(ship.isSunk()).toBe(true);
+  });
+});
+
+describe("Gameboard class", () => {
+  test("new Gameboard()", () => {
+    const gameboard = new Gameboard();
+    expect(gameboard.unplacedShips).toEqual([null, 4, 3, 2, 1]);
+    expect(gameboard.placedShips).toEqual([]);
+    expect(gameboard.grid.length).toBe(10);
+    expect(gameboard.grid[0].length).toBe(10);
+    expect(gameboard.grid[9][9]).toEqual({ shipIndex: -1, status: "none" });
   });
 });
