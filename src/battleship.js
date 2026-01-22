@@ -27,6 +27,17 @@ class Gameboard {
       })),
     );
   }
+
+  addShip(ship) {
+    if (ship.length < 1 || ship.length > 4) {
+      throw new Error("Ship length must be between 1 and 4.");
+    } else if (this.unplacedShips[ship.length] <= 0) {
+      throw new Error("Can't place any more ships of that length.");
+    } else {
+      this.unplacedShips[ship.length]--;
+      this.placedShips.push(ship);
+    }
+  }
 }
 
 export { Ship, Gameboard };
