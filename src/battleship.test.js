@@ -1,4 +1,4 @@
-import { Ship, Gameboard, Player } from "./battleship";
+import { Ship } from "./battleship";
 
 describe("Ship class", () => {
   test("new Ship(position, length, vertical)", () => {
@@ -13,5 +13,12 @@ describe("Ship class", () => {
     expect(ship2.vertical).toBe(false);
   });
 
-  
+  test("hit() and isSunk()", () => {
+    const ship = new Ship({ x: 1, y: 2 }, 2, true);
+    expect(ship.isSunk()).toBe(false);
+    ship.hit();
+    expect(ship.isSunk()).toBe(false);
+    ship.hit();
+    expect(ship.isSunk()).toBe(true);
+  });
 });
