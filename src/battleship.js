@@ -1,3 +1,7 @@
+const isCellTouching = (position1, position2) => {
+  return Math.abs(position1.x - position2.x) <= 1 && Math.abs(position1.y - position2.y) <= 1;
+}
+
 class Ship {
   #hits = 0;
 
@@ -14,6 +18,8 @@ class Ship {
   isSunk() {
     return this.#hits >= this.length;
   }
+
+  isCellTouching
 }
 
 class Gameboard {
@@ -40,4 +46,4 @@ class Gameboard {
   }
 }
 
-export { Ship, Gameboard };
+export { isCellTouching, Ship, Gameboard };
