@@ -38,6 +38,13 @@ class Ship {
       isCellTouching(this.endPosition, ship.endPosition)
     );
   }
+
+  isOutOfBounds() {
+    return (
+      isCellOutOfBounds(this.startPosition) ||
+      isCellOutOfBounds(this.endPosition)
+    );
+  }
 }
 
 class Gameboard {
