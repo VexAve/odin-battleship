@@ -126,6 +126,10 @@ class Gameboard {
       }
     }
   }
+
+  allShipsSunk() {
+    return this.placedShips.every((ship) => ship.isSunk());
+  }
 }
 
 export { isCellTouching, isCellOutOfBounds, Ship, Gameboard };
