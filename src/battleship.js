@@ -25,6 +25,15 @@ class Ship {
   isSunk() {
     return this.#hits >= this.length;
   }
+
+  isTouching(ship) {
+    return (
+      isCellTouching(this.startPosition, ship.startPosition) ||
+      isCellTouching(this.endPosition, ship.startPosition) ||
+      isCellTouching(this.startPosition, ship.endPosition) ||
+      isCellTouching(this.endPosition, ship.endPosition)
+    );
+  }
 }
 
 class Gameboard {
