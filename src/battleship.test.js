@@ -145,7 +145,7 @@ describe("Gameboard class", () => {
 
   describe("receiveAttack()", () => {
     const gameboard = new Gameboard();
-    const ship = new Ship({ x: 0, y: 3 }, 3, false);
+    const ship = new Ship({ x: 0, y: 3 }, 2, false);
     gameboard.addShip(ship);
 
     test("attempt to attack out of bounds cell", () => {
@@ -155,6 +155,12 @@ describe("Gameboard class", () => {
       expect(() => gameboard.receiveAttack({ x: 10, y: 0 })).toThrow(
         "Target cell must be within bounds.",
       );
+    });
+
+    test("missed attack", () => {
+      gameboard.receiveAttack({ x: 0, y: 0 });
+      expect(gameboard.grid[0][0].status).toBe("miss");
+      expect(gameboard.grid[0][1].status).toBe("none");
     });
   });
 });
