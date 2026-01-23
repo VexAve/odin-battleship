@@ -48,7 +48,7 @@ describe("Gameboard class", () => {
       expect(gameboard.unplacedShips).toEqual([null, 4, 3, 1, 1]);
       expect(gameboard.placedShips).toEqual([ship1]);
 
-      const ship2 = new Ship({ x: 2, y: 0 }, 4, false);
+      const ship2 = new Ship({ x: 2, y: 5 }, 4, false);
       gameboard.addShip(ship2);
       expect(gameboard.unplacedShips).toEqual([null, 4, 3, 1, 0]);
       expect(gameboard.placedShips).toEqual([ship1, ship2]);
@@ -84,12 +84,12 @@ describe("Gameboard class", () => {
     });
 
     test("attempt ships too close to each other", () => {
-      const ship1 = new Ship({ x: 1, y: 3 }, 4, false);
+      const ship1 = new Ship({ x: 1, y: 3 }, 2, false);
       expect(() => gameboard.addShip(ship1)).toThrow(
         "Ships can't touch each other..",
       );
 
-      const ship2 = new Ship({ x: 0, y: 0 }, 3, false);
+      const ship2 = new Ship({ x: 4, y: 3 }, 2, true);
       expect(() => gameboard.addShip(ship2)).toThrow(
         "Ships can't touch each other..",
       );
