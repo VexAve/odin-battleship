@@ -1,4 +1,9 @@
-import { isCellTouching, isCellOutOfBounds, Ship, Gameboard } from "./battleship";
+import {
+  isCellTouching,
+  isCellOutOfBounds,
+  Ship,
+  Gameboard,
+} from "./battleship";
 
 test("isCellTouching(position1, position2)", () => {
   expect(isCellTouching({ x: 0, y: 0 }, { x: 0, y: 0 })).toBe(true);
@@ -123,4 +128,21 @@ describe("Gameboard class", () => {
       );
     });
   });
+
+  test("placeShipsOnGrid()", () => {
+    const gameboard = new Gameboard();
+
+    const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
+    gameboard.addShip(ship1);
+    gameboard.placeShipsOnGrid();
+    const ship2 = new Ship({ x: 1, y: 0 }, 2, true);
+    gameboard.addShip(ship2);
+
+    expect(gameboard.grid[0][0].shipIndex).toBe(-1);
+    expect(gameboard.grid[0][3].shipIndex).toBe(0);
+    expect(gameboard.grid[1][0].shipIndex).toBe(1);
+  });
 });
+
+// const ship3 = new Ship({ x: 3, y: 1 }, 1, false);
+// gameboard.addShip(ship3);
