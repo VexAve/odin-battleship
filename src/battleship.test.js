@@ -147,6 +147,7 @@ describe("Gameboard class", () => {
     const gameboard = new Gameboard();
     const ship = new Ship({ x: 0, y: 3 }, 2, false);
     gameboard.addShip(ship);
+    gameboard.placeShipsOnGrid();
 
     test("attempt to attack out of bounds cell", () => {
       expect(() => gameboard.receiveAttack({ x: -1, y: 0 })).toThrow(
