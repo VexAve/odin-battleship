@@ -129,6 +129,19 @@ describe("Gameboard class", () => {
     });
   });
 
+  test("removeShip(ship)", () => {
+    const gameboard = new Gameboard();
+
+    const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
+    gameboard.addShip(ship1);
+    const ship2 = new Ship({ x: 1, y: 0 }, 2, true);
+    gameboard.addShip(ship2);
+    const ship3 = new Ship({ x: 3, y: 0 }, 1, true);
+    gameboard.addShip(ship3);
+    gameboard.removeShip(ship2);
+    expect(gameboard.placedShips).toEqual([ship1, ship3]);
+  });
+
   test("placeShipsOnGrid()", () => {
     const gameboard = new Gameboard();
 
