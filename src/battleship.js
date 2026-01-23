@@ -88,6 +88,17 @@ class Gameboard {
     }
   }
 
+  flagCells(positions) {
+    for (const position of positions) {
+      if (
+        !isCellOutOfBounds(position) &&
+        this.grid[position.x][position.y].status === "none"
+      ) {
+        this.grid[position.x][position.y].status = "flag";
+      }
+    }
+  }
+
   receiveAttack(position) {
     if (isCellOutOfBounds(position)) {
       throw new Error("Target cell must be within bounds.");
@@ -95,39 +106,23 @@ class Gameboard {
       this.grid[position.x][position.y].status = "miss";
     } else {
       this.grid[position.x][position.y].status = "hit";
-      const flagPositions = [
+      this.flagCells([
         { x: position.x + 1, y: position.y + 1 },
         { x: position.x - 1, y: position.y + 1 },
         { x: position.x + 1, y: position.y - 1 },
         { x: position.x - 1, y: position.y - 1 },
-      ];
-      for (const flagPosition of flagPositions) {
-        if (
-          !isCellOutOfBounds(flagPosition) &&
-          this.grid[flagPosition.x][flagPosition.y].status === "none"
-        ) {
-          this.grid[flagPosition.x][flagPosition.y].status = "flag";
-        }
-      }
+      ]);
 
       const ship =
         this.placedShips[this.grid[position.x][position.y].shipIndex];
       ship.hit();
       if (ship.isSunk()) {
-        const flagPositions = [
+        this.flagCells([
           { x: ship.startPosition.x - 1, y: ship.startPosition.y },
           { x: ship.startPosition.x, y: ship.startPosition.y - 1 },
           { x: ship.endPosition.x + 1, y: ship.endPosition.y },
           { x: ship.endPosition.x, y: ship.endPosition.y + 1 },
-        ];
-        for (const flagPosition of flagPositions) {
-          if (
-            !isCellOutOfBounds(flagPosition) &&
-            this.grid[flagPosition.x][flagPosition.y].status === "none"
-          ) {
-            this.grid[flagPosition.x][flagPosition.y].status = "flag";
-          }
-        }
+        ]);
       }
     }
   }
