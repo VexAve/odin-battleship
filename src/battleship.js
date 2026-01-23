@@ -1,6 +1,9 @@
 const isCellTouching = (position1, position2) => {
-  return Math.abs(position1.x - position2.x) <= 1 && Math.abs(position1.y - position2.y) <= 1;
-}
+  return (
+    Math.abs(position1.x - position2.x) <= 1 &&
+    Math.abs(position1.y - position2.y) <= 1
+  );
+};
 
 class Ship {
   #hits = 0;
