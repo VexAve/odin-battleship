@@ -143,6 +143,17 @@ describe("Gameboard class", () => {
     expect(gameboard.grid[1][1].shipIndex).toBe(1);
   });
 
+  test("flagCells(positions)", () => {
+    const gameboard = new Gameboard();
+    gameboard.flagCells([
+      { x: 4, y: 5 },
+      { x: 3, y: 5 },
+    ]);
+
+    expect(gameboard.grid[4][5].status).toBe("flag");
+    expect(gameboard.grid[3][5].status).toBe("flag");
+  });
+
   describe("receiveAttack(position)", () => {
     const gameboard = new Gameboard();
     const ship = new Ship({ x: 0, y: 3 }, 2, false);
