@@ -7,16 +7,18 @@ test("isCellTouching(position1, position2)", () => {
 });
 
 describe("Ship class", () => {
-  test("new Ship(position, length, vertical)", () => {
+  test("new Ship(startPosition, length, vertical)", () => {
     const ship1 = new Ship({ x: 1, y: 2 }, 4, true);
-    expect(ship1.position).toEqual({ x: 1, y: 2 });
+    expect(ship1.startPosition).toEqual({ x: 1, y: 2 });
     expect(ship1.length).toBe(4);
     expect(ship1.vertical).toBe(true);
+    expect(ship1.endPosition).toEqual({ x: 1, y: 5 });
 
     const ship2 = new Ship({ x: 4, y: 3 }, 2, false);
-    expect(ship2.position).toEqual({ x: 4, y: 3 });
+    expect(ship2.startPosition).toEqual({ x: 4, y: 3 });
     expect(ship2.length).toBe(2);
     expect(ship2.vertical).toBe(false);
+    expect(ship2.endPosition).toEqual({ x: 5, y: 3 });
   });
 
   test("hit() and isSunk()", () => {
