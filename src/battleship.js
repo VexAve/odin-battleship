@@ -5,10 +5,14 @@ const isCellTouching = (position1, position2) => {
 class Ship {
   #hits = 0;
 
-  constructor(position, length, vertical) {
-    this.position = position;
+  constructor(startPosition, length, vertical) {
+    this.startPosition = startPosition;
     this.length = length;
     this.vertical = vertical;
+    this.endPosition = {
+      x: startPosition.x + (vertical ? 0 : length - 1),
+      y: startPosition.y + (vertical ? length - 1 : 0),
+    };
   }
 
   hit() {
@@ -18,8 +22,6 @@ class Ship {
   isSunk() {
     return this.#hits >= this.length;
   }
-
-  isCellTouching
 }
 
 class Gameboard {
