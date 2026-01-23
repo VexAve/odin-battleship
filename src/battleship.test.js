@@ -134,13 +134,13 @@ describe("Gameboard class", () => {
 
     const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
     gameboard.addShip(ship1);
-    gameboard.placeShipsOnGrid();
     const ship2 = new Ship({ x: 1, y: 0 }, 2, true);
     gameboard.addShip(ship2);
+    gameboard.placeShipsOnGrid();
 
-    expect(gameboard.grid[0][0].shipIndex).toBe(-1);
-    expect(gameboard.grid[0][3].shipIndex).toBe(0);
-    expect(gameboard.grid[1][0].shipIndex).toBe(1);
+    expect(gameboard.grid[0][4].shipIndex).toBe(-1);
+    expect(gameboard.grid[2][3].shipIndex).toBe(0);
+    expect(gameboard.grid[1][1].shipIndex).toBe(1);
   });
 });
 
