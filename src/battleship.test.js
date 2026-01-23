@@ -77,7 +77,18 @@ describe("Gameboard class", () => {
       );
     });
 
-    // Ships can't touch each other.
+    test("attempt ships too close to each other", () => {
+      const ship1 = new Ship({ x: 1, y: 3 }, 4, false);
+      expect(() => gameboard.addShip(ship1)).toThrow(
+        "Ships can't touch each other..",
+      );
+
+      const ship2 = new Ship({ x: 0, y: 0 }, 3, false);
+      expect(() => gameboard.addShip(ship2)).toThrow(
+        "Ships can't touch each other..",
+      );
+    });
+
     // Ship must be within bounds.
   });
 });
