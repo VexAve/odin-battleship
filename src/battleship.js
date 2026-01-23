@@ -106,7 +106,27 @@ class Gameboard {
           !isCellOutOfBounds(flagPosition) &&
           this.grid[flagPosition.x][flagPosition.y].status === "none"
         ) {
-          this.grid[flagPosition.x][flagPosition.y].status = "flag"
+          this.grid[flagPosition.x][flagPosition.y].status = "flag";
+        }
+      }
+
+      const ship =
+        this.placedShips[this.grid[position.x][position.y].shipIndex];
+      ship.hit();
+      if (ship.isSunk()) {
+        const flagPositions = [
+          { x: ship.startPosition.x - 1, y: ship.startPosition.y },
+          { x: ship.startPosition.x, y: ship.startPosition.y - 1 },
+          { x: ship.endPosition.x + 1, y: ship.endPosition.y },
+          { x: ship.endPosition.x, y: ship.endPosition.y + 1 },
+        ];
+        for (const flagPosition of flagPositions) {
+          if (
+            !isCellOutOfBounds(flagPosition) &&
+            this.grid[flagPosition.x][flagPosition.y].status === "none"
+          ) {
+            this.grid[flagPosition.x][flagPosition.y].status = "flag";
+          }
         }
       }
     }
