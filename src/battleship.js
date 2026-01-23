@@ -64,6 +64,8 @@ class Gameboard {
       throw new Error("Ship length must be between 1 and 4.");
     } else if (this.unplacedShips[ship.length] <= 0) {
       throw new Error("Can't place any more ships of that length.");
+    } else if (ship.isOutOfBounds()) {
+      throw new Error("Ship must be within bounds.");
     } else if (this.placedShips.some((current) => ship.isTouching(current))) {
       throw new Error("Ships can't touch each other.");
     } else {
