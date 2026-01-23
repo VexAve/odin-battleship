@@ -93,6 +93,18 @@ describe("Gameboard class", () => {
       );
     });
 
+    test("attempt to place a ship out of bounds", () => {
+      const ship1 = new Ship({ x: -1, y: 3 }, 2, false);
+      expect(() => gameboard.addShip(ship1)).toThrow(
+        "Ship must be within bounds.",
+      );
+
+      const ship2 = new Ship({ x: 7, y: 9 }, 2, true);
+      expect(() => gameboard.addShip(ship2)).toThrow(
+        "Ship must be within bounds.",
+      );
+    });
+
     test("attempt to place ships too close to each other", () => {
       const ship1 = new Ship({ x: 1, y: 3 }, 2, false);
       expect(() => gameboard.addShip(ship1)).toThrow(
@@ -104,7 +116,5 @@ describe("Gameboard class", () => {
         "Ships can't touch each other.",
       );
     });
-
-    // Ship must be within bounds.
   });
 });
