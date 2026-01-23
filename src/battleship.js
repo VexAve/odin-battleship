@@ -5,6 +5,10 @@ const isCellTouching = (position1, position2) => {
   );
 };
 
+const isCellOutOfBounds = (position) => {
+  return position.x < 0 || position.x > 9 || position.y < 0 || position.y > 9;
+};
+
 class Ship {
   #hits = 0;
 
@@ -62,4 +66,4 @@ class Gameboard {
   }
 }
 
-export { isCellTouching, Ship, Gameboard };
+export { isCellTouching, isCellOutOfBounds, Ship, Gameboard };
