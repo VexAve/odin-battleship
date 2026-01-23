@@ -143,7 +143,7 @@ describe("Gameboard class", () => {
     expect(gameboard.grid[1][1].shipIndex).toBe(1);
   });
 
-  describe("receiveAttack()", () => {
+  describe("receiveAttack(position)", () => {
     const gameboard = new Gameboard();
     const ship = new Ship({ x: 0, y: 3 }, 2, false);
     gameboard.addShip(ship);
