@@ -93,6 +93,22 @@ class Gameboard {
       throw new Error("Target cell must be within bounds.");
     } else if (this.grid[position.x][position.y].shipIndex === -1) {
       this.grid[position.x][position.y].status = "miss";
+    } else {
+      this.grid[position.x][position.y].status = "hit";
+      const flagPositions = [
+        { x: position.x + 1, y: position.y + 1 },
+        { x: position.x - 1, y: position.y + 1 },
+        { x: position.x + 1, y: position.y - 1 },
+        { x: position.x - 1, y: position.y - 1 },
+      ];
+      for (const flagPosition of flagPositions) {
+        if (
+          !isCellOutOfBounds(flagPosition) &&
+          this.grid[flagPosition.x][flagPosition.y].status === "none"
+        ) {
+          this.grid[flagPosition.x][flagPosition.y].status = "flag"
+        }
+      }
     }
   }
 }
