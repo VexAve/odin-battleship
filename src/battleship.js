@@ -140,4 +140,11 @@ class Gameboard {
   }
 }
 
-export { isCellTouching, isCellOutOfBounds, Ship, Gameboard };
+class Player {
+  constructor(name, human) {
+    this.name = name;
+    this.human = human;
+  }
+}
+
+export { isCellTouching, isCellOutOfBounds, Ship, Gameboard, Player };
