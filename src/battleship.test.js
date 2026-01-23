@@ -1,4 +1,10 @@
-import { Ship, Gameboard } from "./battleship";
+import { isCellTouching, Ship, Gameboard } from "./battleship";
+
+test("isCellTouching(position1, position2)", () => {
+  expect(isCellTouching({ x: 0, y: 0 }, { x: 0, y: 0 })).toBe(true);
+  expect(isCellTouching({ x: 0, y: 0 }, { x: 1, y: 1 })).toBe(true);
+  expect(isCellTouching({ x: 0, y: 0 }, { x: 1, y: 2 })).toBe(false);
+});
 
 describe("Ship class", () => {
   test("new Ship(position, length, vertical)", () => {
