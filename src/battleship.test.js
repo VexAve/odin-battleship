@@ -202,6 +202,18 @@ describe("Gameboard class", () => {
       expect(gameboard.grid[2][3].status).toBe("flag");
       expect(ship.isSunk()).toBe(true);
     });
+
+    test("attempt to attack invalid cell", () => {
+      expect(() => gameboard.receiveAttack({ x: 1, y: 3 })).toThrow(
+        "Invalid target cell.",
+      );
+      expect(() => gameboard.receiveAttack({ x: 2, y: 4 })).toThrow(
+        "Invalid target cell.",
+      );
+      expect(() => gameboard.receiveAttack({ x: 0, y: 4 })).toThrow(
+        "Invalid target cell.",
+      );
+    });
   });
 
   test("allShipsSunk()", () => {
@@ -216,7 +228,7 @@ describe("Gameboard class", () => {
     expect(gameboard.allShipsSunk()).toBe(false);
     gameboard.receiveAttack({ x: 0, y: 2 });
     expect(gameboard.allShipsSunk()).toBe(false);
-    gameboard.receiveAttack({ x: 0, y: 0 })
+    gameboard.receiveAttack({ x: 0, y: 0 });
     expect(gameboard.allShipsSunk()).toBe(true);
   });
 });
