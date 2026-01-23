@@ -73,6 +73,20 @@ class Gameboard {
       this.placedShips.push(ship);
     }
   }
+
+  placeShipsOnGrid() {
+    for (const [shipIndex, ship] of this.placedShips.entries()) {
+      if (ship.vertical) {
+        for (let i = ship.startPosition.y; i <= ship.endPosition.y; i++) {
+          this.grid[ship.startPosition.x][i].shipIndex = shipIndex;
+        }
+      } else {
+        for (let i = ship.startPosition.x; i <= ship.endPosition.x; i++) {
+          this.grid[i][ship.startPosition.y].shipIndex = shipIndex;
+        }
+      }
+    }
+  }
 }
 
 export { isCellTouching, isCellOutOfBounds, Ship, Gameboard };
