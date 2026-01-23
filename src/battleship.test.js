@@ -1,9 +1,15 @@
-import { isCellTouching, Ship, Gameboard } from "./battleship";
+import { isCellTouching, isCellOutOfBounds, Ship, Gameboard } from "./battleship";
 
 test("isCellTouching(position1, position2)", () => {
   expect(isCellTouching({ x: 0, y: 0 }, { x: 0, y: 0 })).toBe(true);
   expect(isCellTouching({ x: 0, y: 0 }, { x: 1, y: 1 })).toBe(true);
   expect(isCellTouching({ x: 0, y: 0 }, { x: 1, y: 2 })).toBe(false);
+});
+
+test("isCellOutOfBounds(position)", () => {
+  expect(isCellOutOfBounds({ x: 0, y: 10 })).toBe(true);
+  expect(isCellOutOfBounds({ x: -1, y: 0 })).toBe(true);
+  expect(isCellOutOfBounds({ x: 0, y: 0 })).toBe(false);
 });
 
 describe("Ship class", () => {
