@@ -3,6 +3,7 @@ import {
   isCellOutOfBounds,
   Ship,
   Gameboard,
+  Player,
 } from "./battleship";
 
 test("isCellTouching(position1, position2)", () => {
@@ -230,5 +231,13 @@ describe("Gameboard class", () => {
     expect(gameboard.allShipsSunk()).toBe(false);
     gameboard.receiveAttack({ x: 0, y: 0 });
     expect(gameboard.allShipsSunk()).toBe(true);
+  });
+});
+
+describe("Player class", () => {
+  test("new Player(name, human)", () => {
+    const player = new Player("Vex", true);
+    expect(player.name).toBe("Vex");
+    expect(player.human).toBe(true);
   });
 });
