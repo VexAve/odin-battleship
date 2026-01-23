@@ -142,6 +142,21 @@ describe("Gameboard class", () => {
     expect(gameboard.grid[2][3].shipIndex).toBe(0);
     expect(gameboard.grid[1][1].shipIndex).toBe(1);
   });
+
+  describe("receiveAttack()", () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship({ x: 0, y: 3 }, 3, false);
+    gameboard.addShip(ship);
+
+    test("attempt to attack out of bounds cell", () => {
+      expect(() => gameboard.receiveAttack({ x: -1, y: 0 })).toThrow(
+        "Target cell must be within bounds.",
+      );
+      expect(() => gameboard.receiveAttack({ x: 10, y: 0 })).toThrow(
+        "Target cell must be within bounds.",
+      );
+    });
+  });
 });
 
 // const ship3 = new Ship({ x: 3, y: 1 }, 1, false);
