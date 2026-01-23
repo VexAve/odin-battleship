@@ -91,6 +91,8 @@ class Gameboard {
   receiveAttack(position) {
     if (isCellOutOfBounds(position)) {
       throw new Error("Target cell must be within bounds.");
+    } else if (this.grid[position.x][position.y].shipIndex === -1) {
+      this.grid[position.x][position.y].status = "miss";
     }
   }
 }
