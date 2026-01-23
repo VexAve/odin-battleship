@@ -158,8 +158,8 @@ describe("Gameboard class", () => {
     });
 
     test("missed attack", () => {
-      gameboard.receiveAttack({ x: 0, y: 0 });
-      expect(gameboard.grid[0][0].status).toBe("miss");
+      gameboard.receiveAttack({ x: 0, y: 4 });
+      expect(gameboard.grid[0][4].status).toBe("miss");
       expect(gameboard.grid[0][1].status).toBe("none");
     });
 
@@ -168,7 +168,7 @@ describe("Gameboard class", () => {
       expect(gameboard.grid[1][3].status).toBe("hit");
       expect(gameboard.grid[1][4].status).toBe("none");
       expect(gameboard.grid[2][4].status).toBe("flag");
-      expect(gameboard.grid[0][4].status).toBe("flag");
+      expect(gameboard.grid[0][4].status).toBe("miss");
     });
   });
 });
