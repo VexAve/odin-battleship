@@ -87,6 +87,12 @@ class Gameboard {
       }
     }
   }
+
+  receiveAttack(position) {
+    if (isCellOutOfBounds(position)) {
+      throw new Error("Target cell must be within bounds.");
+    }
+  }
 }
 
 export { isCellTouching, isCellOutOfBounds, Ship, Gameboard };
