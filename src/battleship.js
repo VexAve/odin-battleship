@@ -74,6 +74,12 @@ class Gameboard {
     }
   }
 
+  removeShip(ship) {
+    this.placedShips = this.placedShips.filter(
+      (currentShip) => currentShip !== ship,
+    );
+  }
+
   placeShipsOnGrid() {
     for (const [shipIndex, ship] of this.placedShips.entries()) {
       if (ship.vertical) {
