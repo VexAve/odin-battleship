@@ -171,8 +171,12 @@ describe("Gameboard class", () => {
       expect(gameboard.grid[2][4].status).toBe("flag");
       expect(gameboard.grid[0][4].status).toBe("miss");
     });
+
+    test("fatal attack", () => {
+      expect(ship.isSunk()).toBe(false);
+      gameboard.receiveAttack({ x: 0, y: 3 });
+      expect(gameboard.grid[2][3].status).toBe("flag");
+      expect(ship.isSunk()).toBe(true);
+    });
   });
 });
-
-// const ship3 = new Ship({ x: 3, y: 1 }, 1, false);
-// gameboard.addShip(ship3);
