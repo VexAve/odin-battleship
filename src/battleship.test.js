@@ -190,4 +190,20 @@ describe("Gameboard class", () => {
       expect(ship.isSunk()).toBe(true);
     });
   });
+
+  test("allShipsSunk()", () => {
+    const gameboard = new Gameboard();
+
+    const ship1 = new Ship({ x: 0, y: 2 }, 1, false);
+    gameboard.addShip(ship1);
+    const ship2 = new Ship({ x: 0, y: 0 }, 1, false);
+    gameboard.addShip(ship2);
+    gameboard.placeShipsOnGrid();
+
+    expect(gameboard.allShipsSunk()).toBe(false);
+    gameboard.receiveAttack({ x: 0, y: 2 });
+    expect(gameboard.allShipsSunk()).toBe(false);
+    gameboard.receiveAttack({ x: 0, y: 0 })
+    expect(gameboard.allShipsSunk()).toBe(true);
+  });
 });
