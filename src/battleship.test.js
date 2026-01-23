@@ -96,12 +96,12 @@ describe("Gameboard class", () => {
     test("attempt to place ships too close to each other", () => {
       const ship1 = new Ship({ x: 1, y: 3 }, 2, false);
       expect(() => gameboard.addShip(ship1)).toThrow(
-        "Ships can't touch each other..",
+        "Ships can't touch each other.",
       );
 
       const ship2 = new Ship({ x: 4, y: 3 }, 2, true);
       expect(() => gameboard.addShip(ship2)).toThrow(
-        "Ships can't touch each other..",
+        "Ships can't touch each other.",
       );
     });
 
