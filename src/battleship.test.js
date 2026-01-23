@@ -29,6 +29,14 @@ describe("Ship class", () => {
     ship.hit();
     expect(ship.isSunk()).toBe(true);
   });
+
+  test("isTouching(ship)", () => {
+    const ship1 = new Ship({ x: 0, y: 0 }, 3, true);
+    const ship2 = new Ship({ x: 0, y: 4 }, 3, true);
+    const ship3 = new Ship({ x: 0, y: 4 }, 3, true);
+    expect(ship1.isTouching(ship2)).toBe(false);
+    expect(ship2.isTouching(ship3)).toBe(true);
+  });
 });
 
 describe("Gameboard class", () => {
@@ -54,7 +62,7 @@ describe("Gameboard class", () => {
       gameboard.addShip(ship2);
       expect(gameboard.unplacedShips).toEqual([null, 4, 3, 1, 0]);
       expect(gameboard.placedShips).toEqual([ship1, ship2]);
-      
+
       const ship3 = new Ship({ x: 0, y: 4 }, 3, true);
       gameboard.addShip(ship3);
       expect(gameboard.unplacedShips).toEqual([null, 4, 3, 0, 0]);
