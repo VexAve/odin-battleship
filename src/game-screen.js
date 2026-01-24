@@ -17,10 +17,19 @@ const loadPlayerGrid = (gameboard) => {
         if (gameboard.grid[i][j].status === "miss") {
           cells[i][j].style.backgroundColor = "lightgrey";
           cells[i][j].textContent = "•";
+          cells[i][j].style.color = "darkgrey";
+        } else if (gameboard.grid[i][j].status === "flag") {
+          cells[i][j].style.backgroundColor = "darkgrey";
+          cells[i][j].textContent = "•";
           cells[i][j].style.color = "grey";
         }
       } else {
         cells[i][j].style.backgroundColor = "lightblue";
+        if (gameboard.grid[i][j].status === "hit") {
+          cells[i][j].style.backgroundColor = "pink";
+          cells[i][j].textContent = "✖";
+          cells[i][j].style.color = "red";
+        }
       }
     }
   }

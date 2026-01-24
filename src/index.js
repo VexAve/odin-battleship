@@ -9,6 +9,7 @@ const ship2 = new Ship({ x: 1, y: 0 }, 2, true);
 testGameboard.addShip(ship2);
 testGameboard.placeShipsOnGrid();
 testGameboard.receiveAttack({ x: 3, y: 0 }); // miss
+testGameboard.receiveAttack({ x: 1, y: 3 }); // hit
 
 const body = document.querySelector("body");
 body.replaceChildren(loadGameScreen(null, [testGameboard]));
