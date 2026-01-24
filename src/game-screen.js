@@ -13,7 +13,13 @@ const loadPlayerGrid = (gameboard) => {
       grid.appendChild(cells[i][j]);
       cells[i][j].className = "cell";
 
-      if (gameboard.grid[i][j].shipIndex !== -1) {
+      if (gameboard.grid[i][j].shipIndex === -1) {
+        if (gameboard.grid[i][j].status === "miss") {
+          cells[i][j].style.backgroundColor = "lightgrey";
+          cells[i][j].textContent = "•";
+          cells[i][j].style.color = "grey";
+        }
+      } else {
         cells[i][j].style.backgroundColor = "lightblue";
       }
     }

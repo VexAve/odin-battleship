@@ -8,4 +8,9 @@
 
 #game-screen .grid .cell {
   border: 2px solid black;
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
 }
