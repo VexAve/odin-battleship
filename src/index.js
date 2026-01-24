@@ -13,5 +13,7 @@ testGameboard.receiveAttack({ x: 1, y: 3 }); // hit
 testGameboard.receiveAttack({ x: 1, y: 0 }); // hit
 testGameboard.receiveAttack({ x: 1, y: 1 }); // fatal hit
 
+const testPlayer = new Player("Dylan", true);
+
 const body = document.querySelector("body");
-body.replaceChildren(loadGameScreen(null, [testGameboard]));
+body.replaceChildren(loadGameScreen([testPlayer], [testGameboard]));

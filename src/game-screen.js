@@ -1,5 +1,10 @@
-const loadPlayerGrid = (gameboard) => {
+const loadPlayerGrid = (player, gameboard) => {
   const content = document.createElement("div");
+  content.className = "player-grid";
+
+  const playerName = document.createElement("h2");
+  content.appendChild(playerName);
+  playerName.textContent = player.name;
 
   const grid = document.createElement("div");
   content.appendChild(grid);
@@ -30,7 +35,7 @@ const loadPlayerGrid = (gameboard) => {
           cells[i][j].textContent = "✖";
           cells[i][j].style.color = "red";
           if (gameboard.placedShips[gameboard.grid[i][j].shipIndex].isSunk()) {
-            cells[i][j].style.border = "2px solid red";
+            cells[i][j].style.borderColor = "red";
           }
         }
       }
@@ -44,7 +49,7 @@ export default (players, gameboards) => {
   const content = document.createElement("div");
   content.id = "game-screen";
 
-  content.appendChild(loadPlayerGrid(gameboards[0]));
+  content.appendChild(loadPlayerGrid(players[0], gameboards[0]));
 
   return content;
 };
