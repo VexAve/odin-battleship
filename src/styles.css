@@ -1,0 +1,11 @@
+#game-screen .grid {
+  border: 2px solid black;
+
+  display: grid;
+  grid-template: repeat(10, 50px) / repeat(10, 50px);
+  width: fit-content
+}
+
+#game-screen .grid .cell {
+  border: 2px solid black;
+}
