@@ -29,6 +29,9 @@ const loadPlayerGrid = (gameboard) => {
           cells[i][j].style.backgroundColor = "pink";
           cells[i][j].textContent = "✖";
           cells[i][j].style.color = "red";
+          if (gameboard.placedShips[gameboard.grid[i][j].shipIndex].isSunk()) {
+            cells[i][j].style.border = "2px solid red";
+          }
         }
       }
     }
