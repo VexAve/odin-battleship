@@ -6,13 +6,18 @@ body {
   justify-content: center;
 }
 
-#game-screen .player-grid {
+#player-grids {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#player-grids .player-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#game-screen .player-grid .grid {
+#player-grids .player-grid .grid {
   border: 2px solid black;
 
   display: grid;
@@ -20,7 +25,7 @@ body {
   width: fit-content
 }
 
-#game-screen .player-grid .grid .cell {
+#player-grids .player-grid .grid .cell {
   border: 2px solid black;
   font-size: xx-large;
   display: flex;

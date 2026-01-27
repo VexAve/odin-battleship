@@ -2,18 +2,26 @@ import "./styles.css";
 import { Ship, Gameboard, Player } from "./battleship";
 import loadGameScreen from "./game-screen";
 
-const testGameboard = new Gameboard();
+const testGameboard1 = new Gameboard();
 const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
-testGameboard.addShip(ship1);
+testGameboard1.addShip(ship1);
 const ship2 = new Ship({ x: 1, y: 0 }, 2, true);
-testGameboard.addShip(ship2);
-testGameboard.placeShipsOnGrid();
-testGameboard.receiveAttack({ x: 3, y: 0 }); // miss
-testGameboard.receiveAttack({ x: 1, y: 3 }); // hit
-testGameboard.receiveAttack({ x: 1, y: 0 }); // hit
-testGameboard.receiveAttack({ x: 1, y: 1 }); // fatal hit
+testGameboard1.addShip(ship2);
 
-const testPlayer = new Player("Dylan", true);
+const testGameboard2 = new Gameboard();
+const ship3 = new Ship({ x: 0, y: 3 }, 3, false);
+testGameboard2.addShip(ship3);
+const ship4 = new Ship({ x: 1, y: 0 }, 2, true);
+testGameboard2.addShip(ship4);
+
+const testPlayer1 = new Player("Dylan", true);
+const testPlayer2 = new Player("Vex", true);
 
 const body = document.querySelector("body");
-body.replaceChildren(loadGameScreen([testPlayer], [testGameboard]));
+body.replaceChildren(
+  loadGameScreen(
+    [testPlayer1, testPlayer2],
+    [testGameboard1, testGameboard2],
+    true,
+  ),
+);

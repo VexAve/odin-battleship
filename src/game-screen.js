@@ -1,10 +1,10 @@
-const loadPlayerGrid = (player, gameboard) => {
+const loadPlayerGrid = (player, gameboard, currentTurn) => {
   const content = document.createElement("div");
   content.className = "player-grid";
 
   const playerName = document.createElement("h2");
   content.appendChild(playerName);
-  playerName.textContent = player.name;
+  playerName.textContent = `${player.name}${currentTurn ? " (You)" : ""}`;
 
   const grid = document.createElement("div");
   content.appendChild(grid);
@@ -45,11 +45,16 @@ const loadPlayerGrid = (player, gameboard) => {
   return content;
 };
 
-export default (players, gameboards) => {
+export default (players, gameboards, firstPlayerTurn) => {
   const content = document.createElement("div");
   content.id = "game-screen";
 
-  content.appendChild(loadPlayerGrid(players[0], gameboards[0]));
+  const playerGrids = document.createElement("div");
+  playerGrids.id = "player-grids";
+  content.appendChild(playerGrids);
+
+  playerGrids.appendChild(loadPlayerGrid(players[0], gameboards[0], firstPlayerTurn));
+  playerGrids.appendChild(loadPlayerGrid(players[1], gameboards[1], !firstPlayerTurn));
 
   return content;
 };
