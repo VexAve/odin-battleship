@@ -1,23 +1,6 @@
-const loadPlayerGrid = (player, gameboard, currentTurn) => {
-  const content = document.createElement("div");
-  content.className = "player-grid";
-
-  const playerName = document.createElement("h2");
-  content.appendChild(playerName);
-  playerName.textContent = `${player.name}${currentTurn ? " (You)" : ""}`;
-
-  const grid = document.createElement("div");
-  content.appendChild(grid);
-  grid.className = "grid";
-
-  const cells = [];
+const displayGrid = (gameboard, cells) => {
   for (let i = 0; i < 10; i++) {
-    cells.push([]);
     for (let j = 0; j < 10; j++) {
-      cells[i].push(document.createElement("div"));
-      grid.appendChild(cells[i][j]);
-      cells[i][j].className = "cell";
-
       if (gameboard.grid[i][j].shipIndex === -1) {
         if (gameboard.grid[i][j].status === "miss") {
           cells[i][j].style.backgroundColor = "lightgrey";
@@ -41,6 +24,38 @@ const loadPlayerGrid = (player, gameboard, currentTurn) => {
       }
     }
   }
+};
+
+const loadPlayerGrid = (player, gameboard, currentTurn) => {
+  const content = document.createElement("div");
+  content.className = "player-grid";
+
+  const playerName = document.createElement("h2");
+  content.appendChild(playerName);
+  playerName.textContent = `${player.name}${currentTurn ? " (You)" : ""}`;
+
+  const grid = document.createElement("div");
+  content.appendChild(grid);
+  grid.className = "grid";
+
+  const cells = [];
+  for (let i = 0; i < 10; i++) {
+    cells.push([]);
+    for (let j = 0; j < 10; j++) {
+      cells[i].push(document.createElement("div"));
+      grid.appendChild(cells[i][j]);
+      cells[i][j].className = "cell";
+
+      if (currentTurn) {
+        cells[i][j].addEventListener("click", () => {
+          gameboard.receiveAttack({ x: i, y: j });
+          displayGrid(gameboard, cells);
+        });
+      }
+    }
+  }
+
+  displayGrid(gameboard, cells);
 
   return content;
 };
@@ -53,8 +68,12 @@ export default (players, gameboards, firstPlayerTurn) => {
   playerGrids.id = "player-grids";
   content.appendChild(playerGrids);
 
-  playerGrids.appendChild(loadPlayerGrid(players[0], gameboards[0], firstPlayerTurn));
-  playerGrids.appendChild(loadPlayerGrid(players[1], gameboards[1], !firstPlayerTurn));
+  playerGrids.appendChild(
+    loadPlayerGrid(players[0], gameboards[0], firstPlayerTurn),
+  );
+  playerGrids.appendChild(
+    loadPlayerGrid(players[1], gameboards[1], !firstPlayerTurn),
+  );
 
   return content;
 };

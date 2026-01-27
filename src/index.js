@@ -7,12 +7,14 @@ const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
 testGameboard1.addShip(ship1);
 const ship2 = new Ship({ x: 1, y: 0 }, 2, true);
 testGameboard1.addShip(ship2);
+testGameboard1.placeShipsOnGrid();
 
 const testGameboard2 = new Gameboard();
 const ship3 = new Ship({ x: 0, y: 3 }, 3, false);
 testGameboard2.addShip(ship3);
 const ship4 = new Ship({ x: 1, y: 0 }, 2, true);
 testGameboard2.addShip(ship4);
+testGameboard2.placeShipsOnGrid();
 
 const testPlayer1 = new Player("Dylan", true);
 const testPlayer2 = new Player("Vex", true);

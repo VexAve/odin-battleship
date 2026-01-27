@@ -33,3 +33,7 @@ body {
   align-items: center;
   user-select: none;
 }
+
+#player-grids .player-grid .grid .cell:hover {
+  border-color: yellow;
+}
