@@ -43,6 +43,7 @@ const loadPlayerGrid = (player, gameboard, currentTurn) => {
         cells[i][j].addEventListener("click", () => {
           gameboard.receiveAttack({ x: i, y: j });
           displayGrid(gameboard, cells, false);
+          content.classList.remove("show-hover");
         });
       }
     }
