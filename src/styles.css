@@ -1,3 +1,5 @@
+/* Game Screen */
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100vh;
@@ -11,13 +13,13 @@ body {
   justify-content: space-evenly;
 }
 
-#player-grids .player-grid {
+.player-grid {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#player-grids .player-grid .grid {
+.grid {
   border: 2px solid black;
 
   display: grid;
@@ -25,7 +27,7 @@ body {
   width: fit-content
 }
 
-#player-grids .player-grid .grid .cell {
+.cell {
   border: 2px solid black;
   font-size: xx-large;
   display: flex;
@@ -34,6 +36,6 @@ body {
   user-select: none;
 }
 
-#player-grids .player-grid .grid .cell:hover {
+.cell:hover {
   border-color: yellow;
 }
