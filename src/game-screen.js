@@ -1,10 +1,12 @@
-const displayGrid = (gameboard, cells) => {
+const displayGrid = (gameboard, cells, showShips) => {
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       cells[i][j].className =
-        gameboard.grid[i][j].shipIndex > -1
-          ? "cell show-ship"
-          : "cell " + gameboard.grid[i][j].status;
+        gameboard.grid[i][j].shipIndex === -1
+          ? "cell " + gameboard.grid[i][j].status
+          : showShips
+            ? "cell show-ship"
+            : "cell none";
       if (gameboard.grid[i][j].status === "hit") {
         cells[i][j].className = "cell hit";
         cells[i][j].textContent = "✖";
@@ -18,7 +20,7 @@ const displayGrid = (gameboard, cells) => {
 
 const loadPlayerGrid = (player, gameboard, currentTurn) => {
   const content = document.createElement("div");
-  content.className = "player-grid";
+  content.className = `player-grid${currentTurn ? "" : " show-hover"}`;
 
   const playerName = document.createElement("h2");
   content.appendChild(playerName);
@@ -37,16 +39,16 @@ const loadPlayerGrid = (player, gameboard, currentTurn) => {
       cells[i][j].className = "cell";
       cells[i][j].textContent = "•";
 
-      if (currentTurn) {
+      if (!currentTurn) {
         cells[i][j].addEventListener("click", () => {
           gameboard.receiveAttack({ x: i, y: j });
-          displayGrid(gameboard, cells);
+          displayGrid(gameboard, cells, false);
         });
       }
     }
   }
 
-  displayGrid(gameboard, cells);
+  displayGrid(gameboard, cells, currentTurn);
 
   return content;
 };

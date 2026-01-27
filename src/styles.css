@@ -36,10 +36,6 @@ body {
   user-select: none;
 }
 
-.cell:hover {
-  border-color: yellow;
-}
-
 .none {
   color: white;
 }
@@ -66,4 +62,8 @@ body {
 
 .sunk {
   border-color: red;
+}
+
+.show-hover .none:hover {
+  border-color: yellow;
 }
