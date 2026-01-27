@@ -39,3 +39,31 @@ body {
 .cell:hover {
   border-color: yellow;
 }
+
+.none {
+  color: white;
+}
+
+.miss {
+  background-color: lightgrey;
+  color: darkgrey;
+}
+
+.flag {
+  background-color: darkgrey;
+  color: grey;
+}
+
+.show-ship {
+  background-color: lightblue;
+  color: lightblue;
+}
+
+.hit {
+  background-color: pink;
+  color: red;
+}
+
+.sunk {
+  border-color: red;
+}
