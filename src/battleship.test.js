@@ -184,13 +184,13 @@ describe("Gameboard class", () => {
     });
 
     test("missed attack", () => {
-      gameboard.receiveAttack({ x: 0, y: 4 });
+      expect(gameboard.receiveAttack({ x: 0, y: 4 })).toBe(false);
       expect(gameboard.grid[0][4].status).toBe("miss");
       expect(gameboard.grid[0][1].status).toBe("none");
     });
 
     test("successful attack", () => {
-      gameboard.receiveAttack({ x: 1, y: 3 });
+      expect(gameboard.receiveAttack({ x: 1, y: 3 })).toBe(true);
       expect(gameboard.grid[1][3].status).toBe("hit");
       expect(gameboard.grid[1][4].status).toBe("none");
       expect(gameboard.grid[2][4].status).toBe("flag");
@@ -199,7 +199,7 @@ describe("Gameboard class", () => {
 
     test("fatal attack", () => {
       expect(ship.isSunk()).toBe(false);
-      gameboard.receiveAttack({ x: 0, y: 3 });
+      expect(gameboard.receiveAttack({ x: 0, y: 3 })).toBe(true);
       expect(gameboard.grid[2][3].status).toBe("flag");
       expect(ship.isSunk()).toBe(true);
     });
