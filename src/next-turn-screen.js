@@ -9,7 +9,7 @@ export default (players, firstPlayerTurn, onDone) => {
 
   const noPeekingParagraph = document.createElement("p");
   content.appendChild(noPeekingParagraph);
-  yourTurnParagraph.id = "no-peeking-paragraph";
+  noPeekingParagraph.id = "no-peeking-paragraph";
   noPeekingParagraph.textContent = `${players[firstPlayerTurn ? 1 : 0].name}, no peeking!`;
 
   const doneButton = document.createElement("button");
