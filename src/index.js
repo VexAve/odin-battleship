@@ -1,6 +1,6 @@
 import "./styles.css";
 import { Ship, Gameboard, Player } from "./battleship";
-import loadGameScreen from "./game-screen";
+import loadNextTurnScreen from "./next-turn-screen";
 
 const testGameboard1 = new Gameboard();
 const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
@@ -20,10 +20,6 @@ const testPlayer1 = new Player("Dylan", true);
 const testPlayer2 = new Player("Vex", true);
 
 const body = document.querySelector("body");
-body.replaceChildren(
-  loadGameScreen(
-    [testPlayer1, testPlayer2],
-    [testGameboard1, testGameboard2],
-    true,
-  ),
-);
+body.replaceChildren(loadNextTurnScreen([testPlayer1, testPlayer2], [testGameboard1, testGameboard2], true));
+
+
