@@ -41,15 +41,17 @@ const loadPlayerGrid = (player, gameboard, currentTurn, onNextTurn) => {
 
       if (!currentTurn) {
         cells[i][j].addEventListener("click", () => {
-          try {
-            if (!gameboard.receiveAttack({ x: i, y: j })) {
-              content.classList.remove("show-hover");
-              setTimeout(onNextTurn, 1000);
-            }
-            displayGrid(gameboard, cells, false);
-          } catch {
-            // Invalid cell target.
-          };
+          if (content.classList.contains("show-hover")) {
+            try {
+              if (!gameboard.receiveAttack({ x: i, y: j })) {
+                content.classList.remove("show-hover");
+                setTimeout(onNextTurn, 1000);
+              }
+              displayGrid(gameboard, cells, false);
+            } catch {
+              // Invalid cell target.
+            };
+          }
         });
       }
     }
