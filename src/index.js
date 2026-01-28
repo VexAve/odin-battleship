@@ -1,7 +1,8 @@
 import "./styles.css";
 import { Ship, Gameboard, Player } from "./battleship";
-import loadGameScreen from "./game-screen";
 import loadNextTurnScreen from "./next-turn-screen";
+import loadGameScreen from "./game-screen";
+import loadGameOverScreen from "./game-over-screen";
 
 const testGameboard1 = new Gameboard();
 const ship1 = new Ship({ x: 0, y: 3 }, 3, false);
@@ -41,4 +42,11 @@ const switchToGameScreen = (firstPlayerTurn) => {
   );
 };
 
-switchToNextTurnScreen(true);
+const switchToGameOverScreen = (firstPlayerWin) => {
+  body.replaceChildren(
+    loadGameOverScreen([testPlayer1, testPlayer2], firstPlayerWin, null),
+  );
+};
+
+switchToGameOverScreen(true);
+// switchToNextTurnScreen(true);
