@@ -132,7 +132,11 @@ class Gameboard {
           { x: ship.endPosition.x, y: ship.endPosition.y + 1 },
         ]);
       }
+
+      return true;
     }
+
+    return false;
   }
 
   allShipsSunk() {
