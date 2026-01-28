@@ -18,7 +18,7 @@ const displayGrid = (gameboard, cells, showShips) => {
   }
 };
 
-const loadPlayerGrid = (player, gameboard, currentTurn) => {
+const loadPlayerGrid = (player, gameboard, currentTurn, onNextTurn) => {
   const content = document.createElement("div");
   content.className = `player-grid${currentTurn ? "" : " show-hover"}`;
 
@@ -44,6 +44,7 @@ const loadPlayerGrid = (player, gameboard, currentTurn) => {
           gameboard.receiveAttack({ x: i, y: j });
           displayGrid(gameboard, cells, false);
           content.classList.remove("show-hover");
+          setTimeout(onNextTurn, 1000);
         });
       }
     }
@@ -54,7 +55,7 @@ const loadPlayerGrid = (player, gameboard, currentTurn) => {
   return content;
 };
 
-export default (players, gameboards, firstPlayerTurn) => {
+export default (players, gameboards, firstPlayerTurn, onNextTurn) => {
   const content = document.createElement("div");
   content.id = "game-screen";
 
@@ -63,10 +64,10 @@ export default (players, gameboards, firstPlayerTurn) => {
   playerGrids.id = "player-grids";
 
   playerGrids.appendChild(
-    loadPlayerGrid(players[0], gameboards[0], firstPlayerTurn),
+    loadPlayerGrid(players[0], gameboards[0], firstPlayerTurn, onNextTurn),
   );
   playerGrids.appendChild(
-    loadPlayerGrid(players[1], gameboards[1], !firstPlayerTurn),
+    loadPlayerGrid(players[1], gameboards[1], !firstPlayerTurn, onNextTurn),
   );
 
   return content;

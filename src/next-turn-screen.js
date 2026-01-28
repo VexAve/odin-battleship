@@ -1,4 +1,4 @@
-export default (players, gameboards, firstPlayerTurn) => {
+export default (players, firstPlayerTurn, onDone) => {
   const content = document.createElement("div");
   content.id = "next-turn-screen";
 
@@ -16,6 +16,8 @@ export default (players, gameboards, firstPlayerTurn) => {
   content.appendChild(doneButton);
   doneButton.id = "done-button";
   doneButton.textContent = "Done!";
+
+  doneButton.addEventListener("click", onDone);
 
   return content;
 };
