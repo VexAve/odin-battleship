@@ -48,5 +48,5 @@ const switchToGameOverScreen = (firstPlayerWin) => {
   );
 };
 
-switchToGameOverScreen(true);
-// switchToNextTurnScreen(true);
+// switchToGameOverScreen(true);
+switchToNextTurnScreen(true);
