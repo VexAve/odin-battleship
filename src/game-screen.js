@@ -1,4 +1,10 @@
-export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) => {
+export default (
+  players,
+  gameboards,
+  firstPlayerTurn,
+  onNextTurn,
+  onGameOver,
+) => {
   const content = document.createElement("div");
   content.id = "game-screen";
 
@@ -55,9 +61,7 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
           cells[i][j].addEventListener("click", () => {
             if (playerGrid.classList.contains("show-hover")) {
               try {
-                if (
-                  !gameboards[playerIndex].receiveAttack({ x: i, y: j })
-                ) {
+                if (!gameboards[playerIndex].receiveAttack({ x: i, y: j })) {
                   playerGrid.classList.remove("show-hover");
                   setTimeout(onNextTurn, 1000);
                 } else if (gameboards[playerIndex].allShipsSunk()) {
