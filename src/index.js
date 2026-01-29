@@ -46,12 +46,18 @@ const switchToGameScreen = (firstPlayerTurn = true) => {
 
 const switchToGameOverScreen = (firstPlayerWin) => {
   body.replaceChildren(
-    loadGameOverScreen([testPlayer1, testPlayer2], firstPlayerWin, switchToStartScreen),
+    loadGameOverScreen(
+      [testPlayer1, testPlayer2],
+      firstPlayerWin,
+      switchToStartScreen,
+    ),
   );
 };
 
 const switchToStartScreen = () => {
-  body.replaceChildren(loadStartScreen([testPlayer1, testPlayer2], switchToGameScreen));
+  body.replaceChildren(
+    loadStartScreen([testPlayer1, testPlayer2], switchToGameScreen),
+  );
 };
 
 switchToStartScreen();
