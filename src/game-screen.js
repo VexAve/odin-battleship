@@ -8,20 +8,20 @@ export default (
   const content = document.createElement("div");
   content.id = "game-screen";
 
-  const playerGrids = document.createElement("div");
-  content.appendChild(playerGrids);
-  playerGrids.id = "player-grids";
+  const playerBoards = document.createElement("div");
+  content.appendChild(playerBoards);
+  playerBoards.id = "player-boards";
 
-  const loadPlayerGrid = (playerIndex, currentTurn) => {
-    const playerGrid = document.createElement("div");
-    playerGrid.className = `player-grid${currentTurn ? "" : " show-hover"}`;
+  const loadPlayerBoard = (playerIndex, currentTurn) => {
+    const playerBoard = document.createElement("div");
+    playerBoard.className = `player-board${currentTurn ? "" : " show-hover"}`;
 
     const playerName = document.createElement("h2");
-    playerGrid.appendChild(playerName);
+    playerBoard.appendChild(playerName);
     playerName.textContent = `${players[playerIndex].name}${currentTurn ? " (You)" : ""}`;
 
     const grid = document.createElement("div");
-    playerGrid.appendChild(grid);
+    playerBoard.appendChild(grid);
     grid.className = "grid";
 
     const displayGrid = () => {
@@ -59,13 +59,13 @@ export default (
 
         if (!currentTurn) {
           cells[i][j].addEventListener("click", () => {
-            if (playerGrid.classList.contains("show-hover")) {
+            if (playerBoard.classList.contains("show-hover")) {
               try {
                 if (!gameboards[playerIndex].receiveAttack({ x: i, y: j })) {
-                  playerGrid.classList.remove("show-hover");
+                  playerBoard.classList.remove("show-hover");
                   setTimeout(onNextTurn, 1000);
                 } else if (gameboards[playerIndex].allShipsSunk()) {
-                  playerGrid.classList.remove("show-hover");
+                  playerBoard.classList.remove("show-hover");
                   setTimeout(() => onGameOver(!currentTurn), 1000);
                 }
                 displayGrid();
@@ -80,11 +80,11 @@ export default (
 
     displayGrid();
 
-    return playerGrid;
+    return playerBoard;
   };
 
-  playerGrids.appendChild(loadPlayerGrid(0, firstPlayerTurn));
-  playerGrids.appendChild(loadPlayerGrid(1, !firstPlayerTurn));
+  playerBoards.appendChild(loadPlayerBoard(0, firstPlayerTurn));
+  playerBoards.appendChild(loadPlayerBoard(1, !firstPlayerTurn));
 
   return content;
 };
