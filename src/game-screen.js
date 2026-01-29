@@ -1,4 +1,4 @@
-export default (players, gameboards, firstPlayerTurn, onNextTurn) => {
+export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) => {
   const content = document.createElement("div");
   content.id = "game-screen";
 
@@ -60,6 +60,9 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn) => {
                 ) {
                   content.classList.remove("show-hover");
                   setTimeout(onNextTurn, 1000);
+                } else if (gameboards[currentPlayerIndex].allShipsSunk()) {
+                  content.classList.remove("show-hover");
+                  setTimeout(() => onGameOver(!currentTurn), 1000);
                 }
                 displayGrid();
               } catch {

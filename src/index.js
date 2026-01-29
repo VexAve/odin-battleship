@@ -38,6 +38,7 @@ const switchToGameScreen = (firstPlayerTurn) => {
       [testGameboard1, testGameboard2],
       firstPlayerTurn,
       () => switchToNextTurnScreen(!firstPlayerTurn),
+      switchToGameOverScreen
     ),
   );
 };
