@@ -6,13 +6,13 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
   content.appendChild(playerGrids);
   playerGrids.id = "player-grids";
 
-  const loadPlayerGrid = (currentPlayerIndex, currentTurn) => {
+  const loadPlayerGrid = (playerIndex, currentTurn) => {
     const content = document.createElement("div");
     content.className = `player-grid${currentTurn ? "" : " show-hover"}`;
 
     const playerName = document.createElement("h2");
     content.appendChild(playerName);
-    playerName.textContent = `${players[currentPlayerIndex].name}${currentTurn ? " (You)" : ""}`;
+    playerName.textContent = `${players[playerIndex].name}${currentTurn ? " (You)" : ""}`;
 
     const grid = document.createElement("div");
     content.appendChild(grid);
@@ -22,17 +22,17 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           cells[i][j].className =
-            gameboards[currentPlayerIndex].grid[i][j].shipIndex === -1
-              ? "cell " + gameboards[currentPlayerIndex].grid[i][j].status
+            gameboards[playerIndex].grid[i][j].shipIndex === -1
+              ? "cell " + gameboards[playerIndex].grid[i][j].status
               : currentTurn
                 ? "cell show-ship"
                 : "cell none";
-          if (gameboards[currentPlayerIndex].grid[i][j].status === "hit") {
+          if (gameboards[playerIndex].grid[i][j].status === "hit") {
             cells[i][j].className = "cell hit";
             cells[i][j].textContent = "✖";
             if (
-              gameboards[currentPlayerIndex].placedShips[
-                gameboards[currentPlayerIndex].grid[i][j].shipIndex
+              gameboards[playerIndex].placedShips[
+                gameboards[playerIndex].grid[i][j].shipIndex
               ].isSunk()
             ) {
               cells[i][j].classList.add("sunk");
@@ -56,11 +56,11 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
             if (content.classList.contains("show-hover")) {
               try {
                 if (
-                  !gameboards[currentPlayerIndex].receiveAttack({ x: i, y: j })
+                  !gameboards[playerIndex].receiveAttack({ x: i, y: j })
                 ) {
                   content.classList.remove("show-hover");
                   setTimeout(onNextTurn, 1000);
-                } else if (gameboards[currentPlayerIndex].allShipsSunk()) {
+                } else if (gameboards[playerIndex].allShipsSunk()) {
                   content.classList.remove("show-hover");
                   setTimeout(() => onGameOver(!currentTurn), 1000);
                 }
