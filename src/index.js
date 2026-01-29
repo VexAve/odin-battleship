@@ -1,5 +1,6 @@
 import "./styles.css";
 import { Ship, Gameboard, Player } from "./battleship";
+import loadStartScreen from "./start-screen";
 import loadNextTurnScreen from "./next-turn-screen";
 import loadGameScreen from "./game-screen";
 import loadGameOverScreen from "./game-over-screen";
@@ -49,5 +50,10 @@ const switchToGameOverScreen = (firstPlayerWin) => {
   );
 };
 
-// switchToGameOverScreen(true);
-switchToNextTurnScreen(true);
+const switchToStartScreen = () => {
+  body.replaceChildren(
+    loadStartScreen([testPlayer1, testPlayer2], null),
+  );
+};
+
+switchToStartScreen();

@@ -4,7 +4,7 @@ export default (players, firstPlayerWin, onPlayAgain) => {
 
   const youWinParagraph = document.createElement("p");
   content.appendChild(youWinParagraph);
-  youWinParagraph.id = "your-lose-paragraph";
+  youWinParagraph.id = "you-win-paragraph";
   youWinParagraph.textContent = `Congratulations, ${players[firstPlayerWin ? 0 : 1].name}. You won!`;
 
   const youLoseParagraph = document.createElement("p");

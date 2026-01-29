@@ -2,14 +2,58 @@ export default (players, onDone) => {
   const content = document.createElement("div");
   content.id = "start-screen";
 
+  const battleshipHeading = document.createElement("h1");
+  content.appendChild(battleshipHeading);
+  battleshipHeading.textContent = "Battleship";
+
   const playerForms = document.createElement("div");
   content.appendChild(playerForms);
   playerForms.id = "player-forms";
 
   const loadPlayerForm = (playerIndex) => {
+    const playerForm = document.createElement("div");
+    playerForm.className = "player-form";
 
-  }
+    const playerHeading = document.createElement("h2");
+    playerForm.appendChild(playerHeading);
+    playerHeading.textContent = `Player ${playerIndex + 1}`;
 
-  playerForms.appendChild(loadPlayerGrid(0, firstPlayerTurn));
-  playerForms.appendChild(loadPlayerGrid(1, !firstPlayerTurn));
-}
+    const nameLabel = document.createElement("label");
+    playerForm.appendChild(nameLabel);
+    nameLabel.textContent = "Name:";
+
+    const nameInput = document.createElement("input");
+    nameLabel.appendChild(nameInput);
+    nameInput.value = players[playerIndex].name;
+
+    const humanOrCpuLabel = document.createElement("label");
+    playerForm.appendChild(humanOrCpuLabel);
+    humanOrCpuLabel.textContent = "Human or CPU:";
+
+    const humanOrCpuSelect = document.createElement("select");
+    humanOrCpuLabel.appendChild(humanOrCpuSelect);
+    humanOrCpuSelect.value = players[playerIndex].human ? "human" : "cpu";
+
+    const humanOption = document.createElement("option");
+    humanOrCpuSelect.appendChild(humanOption);
+    humanOption.textContent = "Human";
+    humanOption.value = "human";
+
+    const cpuOption = document.createElement("option");
+    humanOrCpuSelect.appendChild(cpuOption);
+    cpuOption.textContent = "CPU";
+    cpuOption.value = "cpu";
+
+    return playerForm;
+  };
+
+  playerForms.appendChild(loadPlayerForm(0));
+  playerForms.appendChild(loadPlayerForm(1));
+
+  const doneButton = document.createElement("button");
+  content.appendChild(doneButton);
+  doneButton.id = "done-button";
+  doneButton.textContent = "Done!";
+  
+  return content;
+};
