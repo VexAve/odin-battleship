@@ -26,6 +26,11 @@ export default (players, onDone) => {
     nameLabel.appendChild(nameInput);
     nameInput.value = players[playerIndex].name;
 
+    nameInput.addEventListener(
+      "change",
+      () => (players[playerIndex].name = nameInput.value),
+    );
+
     const humanOrCpuLabel = document.createElement("label");
     playerForm.appendChild(humanOrCpuLabel);
     humanOrCpuLabel.textContent = "Human or CPU:";
@@ -33,6 +38,11 @@ export default (players, onDone) => {
     const humanOrCpuSelect = document.createElement("select");
     humanOrCpuLabel.appendChild(humanOrCpuSelect);
     humanOrCpuSelect.value = players[playerIndex].human ? "human" : "cpu";
+
+    humanOrCpuSelect.addEventListener(
+      "change",
+      () => (players[playerIndex].human = humanOrCpuSelect.value === "human"),
+    );
 
     const humanOption = document.createElement("option");
     humanOrCpuSelect.appendChild(humanOption);
@@ -54,6 +64,12 @@ export default (players, onDone) => {
   content.appendChild(doneButton);
   doneButton.id = "done-button";
   doneButton.textContent = "Done!";
-  
+
+  doneButton.addEventListener("click", () => {
+    players[0].name ||= "Player 1";
+    players[1].name ||= "Player 2";
+    onDone();
+  });
+
   return content;
 };
