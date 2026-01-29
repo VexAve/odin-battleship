@@ -7,15 +7,15 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
   playerGrids.id = "player-grids";
 
   const loadPlayerGrid = (playerIndex, currentTurn) => {
-    const content = document.createElement("div");
-    content.className = `player-grid${currentTurn ? "" : " show-hover"}`;
+    const playerGrid = document.createElement("div");
+    playerGrid.className = `player-grid${currentTurn ? "" : " show-hover"}`;
 
     const playerName = document.createElement("h2");
-    content.appendChild(playerName);
+    playerGrid.appendChild(playerName);
     playerName.textContent = `${players[playerIndex].name}${currentTurn ? " (You)" : ""}`;
 
     const grid = document.createElement("div");
-    content.appendChild(grid);
+    playerGrid.appendChild(grid);
     grid.className = "grid";
 
     const displayGrid = () => {
@@ -53,15 +53,15 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
 
         if (!currentTurn) {
           cells[i][j].addEventListener("click", () => {
-            if (content.classList.contains("show-hover")) {
+            if (playerGrid.classList.contains("show-hover")) {
               try {
                 if (
                   !gameboards[playerIndex].receiveAttack({ x: i, y: j })
                 ) {
-                  content.classList.remove("show-hover");
+                  playerGrid.classList.remove("show-hover");
                   setTimeout(onNextTurn, 1000);
                 } else if (gameboards[playerIndex].allShipsSunk()) {
-                  content.classList.remove("show-hover");
+                  playerGrid.classList.remove("show-hover");
                   setTimeout(() => onGameOver(!currentTurn), 1000);
                 }
                 displayGrid();
@@ -76,7 +76,7 @@ export default (players, gameboards, firstPlayerTurn, onNextTurn, onGameOver) =>
 
     displayGrid();
 
-    return content;
+    return playerGrid;
   };
 
   playerGrids.appendChild(loadPlayerGrid(0, firstPlayerTurn));
