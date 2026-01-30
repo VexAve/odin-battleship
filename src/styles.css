@@ -79,6 +79,28 @@ body {
 }
 
 #next-turn-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+
+  p {
+    margin: 10px;
+  }
+
   #your-turn-paragraph {
+    font-size: xx-large;
+  }
+
+  #no-peeking-paragraph {
+    font-size: large;
+  }
+
+  #done-button {
+    margin-top: 20px;
+    width: 100px;
+    height: 50px;
+    font-size: medium;
   }
 }
