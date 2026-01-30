@@ -11,10 +11,17 @@ body {
   justify-content: center;
 }
 
+#start-screen {
+
+
+  h1 {
+    font-size: xxx-large;
+  }
+}
+
 #next-turn-screen {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-weight: bold;
 
@@ -108,7 +115,6 @@ body {
 #game-over-screen {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-weight: bold;
 
