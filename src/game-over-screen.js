@@ -1,6 +1,6 @@
 export default (players, firstPlayerWin, onPlayAgain) => {
   const content = document.createElement("div");
-  content.id = "next-turn-screen";
+  content.id = "game-over-screen";
 
   const youWinParagraph = document.createElement("p");
   content.appendChild(youWinParagraph);
