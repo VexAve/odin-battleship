@@ -124,9 +124,9 @@ body {
     font-size: large;
   }
 
-  #done-button {
+  #play-again-button {
     margin-top: 20px;
-    width: 100px;
+    width: 120px;
     height: 50px;
     font-size: medium;
   }
