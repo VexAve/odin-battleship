@@ -1,69 +1,84 @@
-/* Game Screen */
-
 body {
+  background-color: darkgray;
   font-family: Arial, Helvetica, sans-serif;
+
+  width: 100vw;
   height: 100vh;
+  margin: 0;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-#player-boards {
+#game-screen {
   display: flex;
   justify-content: space-evenly;
-}
-
-.player-board {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+
+  .player-board {
+    background-color: lightgray;
+    padding: 30px;
+    border-radius: 50px;
+    box-shadow: 10px 10px 5px gray;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .grid {
+    border: 2px solid black;
+
+    display: grid;
+    grid-template: repeat(10, 50px) / repeat(10, 50px);
+    width: fit-content;
+  }
+
+  .cell {
+    background-color: white;
+    border: 2px solid black;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+  .none {
+    color: white;
+  }
+
+  .miss {
+    background-color: lightgrey;
+    color: darkgrey;
+  }
+
+  .flag {
+    background-color: darkgrey;
+    color: grey;
+  }
+
+  .show-ship {
+    background-color: lightblue;
+    color: lightblue;
+  }
+
+  .hit {
+    background-color: pink;
+    color: red;
+  }
+
+  .sunk {
+    border-color: red;
+  }
+
+  .show-hover .none:hover {
+    border-color: yellow;
+  }
 }
 
-.grid {
-  border: 2px solid black;
-
-  display: grid;
-  grid-template: repeat(10, 50px) / repeat(10, 50px);
-  width: fit-content
-}
-
-.cell {
-  border: 2px solid black;
-  font-size: xx-large;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-}
-
-.none {
-  color: white;
-}
-
-.miss {
-  background-color: lightgrey;
-  color: darkgrey;
-}
-
-.flag {
-  background-color: darkgrey;
-  color: grey;
-}
-
-.show-ship {
-  background-color: lightblue;
-  color: lightblue;
-}
-
-.hit {
-  background-color: pink;
-  color: red;
-}
-
-.sunk {
-  border-color: red;
-}
-
-.show-hover .none:hover {
-  border-color: yellow;
+#next-turn-screen {
+  #your-turn-paragraph {
+  }
 }

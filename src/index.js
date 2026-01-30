@@ -1,6 +1,7 @@
 import "./styles.css";
 import { Ship, Gameboard, Player } from "./battleship";
 import loadStartScreen from "./start-screen";
+import loadPutShipsScreen from "./put-ships-screen";
 import loadNextTurnScreen from "./next-turn-screen";
 import loadGameScreen from "./game-screen";
 import loadGameOverScreen from "./game-over-screen";
@@ -24,7 +25,23 @@ const testPlayer2 = new Player("Vex", true);
 
 const body = document.querySelector("body");
 
-const switchToNextTurnScreen = (firstPlayerTurn) => {
+const switchToStartScreen = () => {
+  body.replaceChildren(
+    loadStartScreen([testPlayer1, testPlayer2], switchToPutShipsScreen),
+  );
+};
+
+const switchToPutShipsScreen = () => {
+  body.replaceChildren(
+    loadPutShipsScreen(
+      [testPlayer1, testPlayer2],
+      [testGameboard1, testGameboard2],
+      switchToNextTurnScreen,
+    ),
+  );
+};
+
+const switchToNextTurnScreen = (firstPlayerTurn = true) => {
   body.replaceChildren(
     loadNextTurnScreen([testPlayer1, testPlayer2], firstPlayerTurn, () =>
       switchToGameScreen(firstPlayerTurn),
@@ -32,7 +49,7 @@ const switchToNextTurnScreen = (firstPlayerTurn) => {
   );
 };
 
-const switchToGameScreen = (firstPlayerTurn = true) => {
+const switchToGameScreen = (firstPlayerTurn) => {
   body.replaceChildren(
     loadGameScreen(
       [testPlayer1, testPlayer2],
@@ -54,10 +71,8 @@ const switchToGameOverScreen = (firstPlayerWin) => {
   );
 };
 
-const switchToStartScreen = () => {
-  body.replaceChildren(
-    loadStartScreen([testPlayer1, testPlayer2], switchToGameScreen),
-  );
-};
-
-switchToStartScreen();
+// switchToStartScreen();
+// switchToPutShipsScreen();
+// switchToNextTurnScreen();
+switchToGameScreen();
+// switchToGameOverScreen();

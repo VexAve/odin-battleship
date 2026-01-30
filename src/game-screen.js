@@ -8,10 +8,6 @@ export default (
   const content = document.createElement("div");
   content.id = "game-screen";
 
-  const playerBoards = document.createElement("div");
-  content.appendChild(playerBoards);
-  playerBoards.id = "player-boards";
-
   const loadPlayerBoard = (playerIndex, currentTurn) => {
     const playerBoard = document.createElement("div");
     playerBoard.className = `player-board${currentTurn ? "" : " show-hover"}`;
@@ -83,8 +79,8 @@ export default (
     return playerBoard;
   };
 
-  playerBoards.appendChild(loadPlayerBoard(0, firstPlayerTurn));
-  playerBoards.appendChild(loadPlayerBoard(1, !firstPlayerTurn));
+  content.appendChild(loadPlayerBoard(0, firstPlayerTurn));
+  content.appendChild(loadPlayerBoard(1, !firstPlayerTurn));
 
   return content;
 };
