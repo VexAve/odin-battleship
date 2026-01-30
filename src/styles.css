@@ -104,3 +104,30 @@ body {
     font-size: medium;
   }
 }
+
+#game-over-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+
+  p {
+    margin: 10px;
+  }
+
+  #you-win-paragraph {
+    font-size: xx-large;
+  }
+
+  #you-lose-paragraph {
+    font-size: large;
+  }
+
+  #done-button {
+    margin-top: 20px;
+    width: 100px;
+    height: 50px;
+    font-size: medium;
+  }
+}
