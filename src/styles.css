@@ -12,10 +12,45 @@ body {
 }
 
 #start-screen {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h1 {
     font-size: xxx-large;
+  }
+
+  #player-forms {
+    width: 100vw;
+    margin-bottom: 30px;
+
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .player-form {
+    background-color: lightgray;
+    padding: 30px;
+    border-radius: 50px;
+    box-shadow: 10px 10px 5px gray;
+
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      text-align: center;
+    }
+
+    input, select {
+      margin-bottom: 20px;
+    }
+  }
+
+  #done-button {
+    margin-top: 20px;
+    width: 100px;
+    height: 50px;
+    font-size: medium;
   }
 }
 
