@@ -75,6 +75,7 @@ class Gameboard {
   }
 
   removeShip(ship) {
+    this.unplacedShips[ship.length]++;
     this.placedShips = this.placedShips.filter(
       (currentShip) => currentShip !== ship,
     );
