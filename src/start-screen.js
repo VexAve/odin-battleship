@@ -21,9 +21,11 @@ export default (players, onDone) => {
     const nameLabel = document.createElement("label");
     playerForm.appendChild(nameLabel);
     nameLabel.textContent = "Name:";
+    nameLabel.htmlFor = "name-input";
 
     const nameInput = document.createElement("input");
-    nameLabel.appendChild(nameInput);
+    playerForm.appendChild(nameInput);
+    nameInput.id = "name-input";
     nameInput.value = players[playerIndex].name;
 
     nameInput.addEventListener(
@@ -34,9 +36,11 @@ export default (players, onDone) => {
     const humanOrCpuLabel = document.createElement("label");
     playerForm.appendChild(humanOrCpuLabel);
     humanOrCpuLabel.textContent = "Human or CPU:";
+    humanOrCpuLabel.htmlFor = "human-or-cpu-input";
 
     const humanOrCpuSelect = document.createElement("select");
-    humanOrCpuLabel.appendChild(humanOrCpuSelect);
+    playerForm.appendChild(humanOrCpuSelect);
+    humanOrCpuSelect.id = "human-or-cpu-input";
     humanOrCpuSelect.value = players[playerIndex].human ? "human" : "cpu";
 
     humanOrCpuSelect.addEventListener(
