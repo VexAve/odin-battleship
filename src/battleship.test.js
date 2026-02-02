@@ -141,6 +141,7 @@ describe("Gameboard class", () => {
     gameboard.addShip(ship3);
     gameboard.removeShip(ship2);
     expect(gameboard.placedShips).toEqual([ship1, ship3]);
+    expect(gameboard.unplacedShips).toEqual([null, 3, 3, 1, 1]);
   });
 
   test("placeShipsOnGrid()", () => {
