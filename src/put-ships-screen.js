@@ -44,8 +44,16 @@ export default (players, gameboards, onDone) => {
     });
 
     const dragMouseMove = (e) => {
-      shipElement.style.top = `${shipElement.offsetTop + e.clientY - prevMouseY}px`;
-      shipElement.style.left = `${shipElement.offsetLeft + e.clientX - prevMouseX}px`;
+      shipElement.style.top =
+        Math.min(
+          window.innerHeight - shipElement.offsetHeight,
+          Math.max(0, shipElement.offsetTop + e.clientY - prevMouseY),
+        ) + "px";
+      shipElement.style.left =
+        Math.min(
+          window.innerWidth - shipElement.offsetWidth,
+          Math.max(0, shipElement.offsetLeft + e.clientX - prevMouseX),
+        ) + "px";
 
       prevMouseX = e.clientX;
       prevMouseY = e.clientY;
