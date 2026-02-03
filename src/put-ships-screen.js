@@ -24,6 +24,9 @@ export default (players, gameboards, onDone) => {
     return playerBoard;
   };
 
+  const playerBoard = loadPlayerBoard(0);
+  content.appendChild(playerBoard);
+
   const createDraggableShip = (length) => {
     const shipElement = document.createElement("div");
     shipElement.className = "ship";
@@ -67,7 +70,6 @@ export default (players, gameboards, onDone) => {
     return shipElement;
   };
 
-  content.appendChild(loadPlayerBoard(0));
   content.appendChild(createDraggableShip(4));
 
   return content;
