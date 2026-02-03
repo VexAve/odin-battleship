@@ -31,20 +31,20 @@ export default (players, gameboards, onDone) => {
   const playerBoard = loadPlayerBoard(0);
   content.appendChild(playerBoard);
 
-  const createshipElement = (length) => {
-    const shipElement = document.createElement("div");
-    shipElement.className = "ship";
+  const createDraggableShip = (length) => {
+    const draggableShip = document.createElement("div");
+    draggableShip.className = "ship";
     for (let i = 0; i < length; i++) {
       const shipCell = document.createElement("div");
       shipCell.className = "ship-cell";
-      shipElement.appendChild(shipCell);
+      draggableShip.appendChild(shipCell);
     }
 
-    const rect = shipElement.getBoundingClientRect();
+    const rect = draggableShip.getBoundingClientRect();
     let prevMouseX, prevMouseY;
 
-    shipElement.addEventListener("mousedown", (e) => {
-      prevMouseX = shipElement.getBoundingClientRect() - e.clientX;
+    draggableShip.addEventListener("mousedown", (e) => {
+      prevMouseX = draggableShip.getBoundingClientRect() - e.clientX;
       prevMouseY = e.clientY;
 
       document.addEventListener("mousemove", dragMouseMove);
@@ -52,15 +52,15 @@ export default (players, gameboards, onDone) => {
     });
 
     const dragMouseMove = (e) => {
-      shipElement.style.left = clamp(
-        shipElement.offsetLeft + e.clientX - prevMouseX,
+      draggableShip.style.left = clamp(
+        draggableShip.offsetLeft + e.clientX - prevMouseX,
         0,
-        window.innerWidth - shipElement.offsetWidth,
+        window.innerWidth - draggableShip.offsetWidth,
       );
-      shipElement.style.top = clamp(
-        shipElement.offsetTop + e.clientY - prevMouseY,
+      draggableShip.style.top = clamp(
+        draggableShip.offsetTop + e.clientY - prevMouseY,
         0,
-        window.innerHeight - shipElement.offsetHeight,
+        window.innerHeight - draggableShip.offsetHeight,
       );
 
       prevMouseX = e.clientX;
@@ -72,10 +72,10 @@ export default (players, gameboards, onDone) => {
       document.removeEventListener("mouseup", dragMouseUp);
     };
 
-    return shipElement;
+    return draggableShip;
   };
 
-  content.appendChild(createshipElement(4));
+  content.appendChild(createDraggableShip(4));
 
   return content;
 };
