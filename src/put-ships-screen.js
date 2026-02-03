@@ -3,7 +3,7 @@ export default (players, gameboards, onDone) => {
   content.id = "put-ships-screen";
 
   // Put tabs here.
-  
+
   const loadPlayerBoard = (playerIndex) => {
     const playerBoard = document.createElement("div");
 
@@ -22,9 +22,45 @@ export default (players, gameboards, onDone) => {
     }
 
     return playerBoard;
-  }
+  };
+
+  const createDraggableShip = (length) => {
+    const shipElement = document.createElement("div");
+    shipElement.className = "ship";
+    for (let i = 0; i < length; i++) {
+      const shipCell = document.createElement("div");
+      shipCell.className = "ship-cell";
+      shipElement.appendChild(shipCell);
+    }
+
+    let prevMouseX, prevMouseY;
+
+    shipElement.addEventListener("mousedown", (e) => {
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
+
+      document.addEventListener("mousemove", dragMouseMove);
+      document.addEventListener("mouseup", dragMouseUp);
+    });
+
+    const dragMouseMove = (e) => {
+      shipElement.style.top = `${shipElement.offsetTop + e.clientY - prevMouseY}px`;
+      shipElement.style.left = `${shipElement.offsetLeft + e.clientX - prevMouseX}px`;
+
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
+    };
+
+    const dragMouseUp = () => {
+      document.removeEventListener("mousemove", dragMouseMove);
+      document.removeEventListener("mouseup", dragMouseUp);
+    };
+
+    return shipElement;
+  };
 
   content.appendChild(loadPlayerBoard(0));
+  content.appendChild(createDraggableShip(4));
 
   return content;
 };
