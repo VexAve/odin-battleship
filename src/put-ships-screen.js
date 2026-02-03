@@ -1,3 +1,7 @@
+const clamp = (value, min, max) => {
+  return Math.min(max, Math.max(min, value));
+};
+
 export default (players, gameboards, onDone) => {
   const content = document.createElement("div");
   content.id = "put-ships-screen";
@@ -27,7 +31,7 @@ export default (players, gameboards, onDone) => {
   const playerBoard = loadPlayerBoard(0);
   content.appendChild(playerBoard);
 
-  const createDraggableShip = (length) => {
+  const createshipElement = (length) => {
     const shipElement = document.createElement("div");
     shipElement.className = "ship";
     for (let i = 0; i < length; i++) {
@@ -36,10 +40,11 @@ export default (players, gameboards, onDone) => {
       shipElement.appendChild(shipCell);
     }
 
+    const rect = shipElement.getBoundingClientRect();
     let prevMouseX, prevMouseY;
 
     shipElement.addEventListener("mousedown", (e) => {
-      prevMouseX = e.clientX;
+      prevMouseX = shipElement.getBoundingClientRect() - e.clientX;
       prevMouseY = e.clientY;
 
       document.addEventListener("mousemove", dragMouseMove);
@@ -47,16 +52,16 @@ export default (players, gameboards, onDone) => {
     });
 
     const dragMouseMove = (e) => {
-      shipElement.style.top =
-        Math.min(
-          window.innerHeight - shipElement.offsetHeight,
-          Math.max(0, shipElement.offsetTop + e.clientY - prevMouseY),
-        ) + "px";
-      shipElement.style.left =
-        Math.min(
-          window.innerWidth - shipElement.offsetWidth,
-          Math.max(0, shipElement.offsetLeft + e.clientX - prevMouseX),
-        ) + "px";
+      shipElement.style.left = clamp(
+        shipElement.offsetLeft + e.clientX - prevMouseX,
+        0,
+        window.innerWidth - shipElement.offsetWidth,
+      );
+      shipElement.style.top = clamp(
+        shipElement.offsetTop + e.clientY - prevMouseY,
+        0,
+        window.innerHeight - shipElement.offsetHeight,
+      );
 
       prevMouseX = e.clientX;
       prevMouseY = e.clientY;
@@ -70,7 +75,7 @@ export default (players, gameboards, onDone) => {
     return shipElement;
   };
 
-  content.appendChild(createDraggableShip(4));
+  content.appendChild(createshipElement(4));
 
   return content;
 };
