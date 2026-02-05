@@ -31,13 +31,17 @@ export default (players, gameboards, onDone) => {
   const playerBoard = loadPlayerBoard(0);
   content.appendChild(playerBoard);
 
-  const createDraggableShip = (length) => {
+  const createDraggableShip = (length, vertical) => {
     const draggableShip = document.createElement("div");
     draggableShip.className = "ship";
     for (let i = 0; i < length; i++) {
       const shipCell = document.createElement("div");
       shipCell.className = "ship-cell";
       draggableShip.appendChild(shipCell);
+    }
+
+    if (!vertical) {
+      draggableShip.style.display = "flex";
     }
 
     let offsetX, offsetY, boardRect;
@@ -68,9 +72,9 @@ export default (players, gameboards, onDone) => {
 
       if (
         e.clientX + offsetX >= boardRect.left - 25 &&
-        e.clientX + offsetX <= boardRect.left + 475 &&
+        e.clientX + offsetX <= boardRect.left + 525 - (vertical ? 1 : length) * 50 &&
         e.clientY + offsetY >= boardRect.top - 25 &&
-        e.clientY + offsetY <= boardRect.top + 525 - length * 50
+        e.clientY + offsetY <= boardRect.top + 525 - (vertical ? length : 1) * 50
       ) {
         draggableShip.style.left =
           Math.round((e.clientX + offsetX - boardRect.left) / 50) * 50 +
@@ -91,7 +95,7 @@ export default (players, gameboards, onDone) => {
     return draggableShip;
   };
 
-  content.appendChild(createDraggableShip(4));
+  content.appendChild(createDraggableShip(4, false));
 
   return content;
 };
