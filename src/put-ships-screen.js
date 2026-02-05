@@ -97,13 +97,13 @@ export default (players, gameboards, onDone) => {
     return draggableShip;
   };
 
-  const loadShipGenerator = (length) => {
+  const loadShipGenerator = (playerIndex, length) => {
     const shipGenerator = document.createElement("div");
     shipGenerator.className = "ship-generator";
 
     const shipCount = document.createElement("span");
     shipGenerator.appendChild(shipCount);
-    shipCount.textContent = length;
+    shipCount.textContent = gameboards[playerIndex].unplacedShips[length];
 
     const rotateButton = document.createElement("button");
     shipGenerator.appendChild(rotateButton);
@@ -114,7 +114,7 @@ export default (players, gameboards, onDone) => {
     return shipGenerator;
   }
 
-  content.appendChild(loadShipGenerator(4));
+  content.appendChild(loadShipGenerator(0, 4));
   content.appendChild(createDraggableShip(4, false));
 
   return content;
