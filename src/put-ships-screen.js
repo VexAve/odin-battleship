@@ -1,3 +1,5 @@
+import rotateImage from "./assets/rotate-left.svg";
+
 const clamp = (value, min, max) => {
   return Math.min(max, Math.max(min, value));
 };
@@ -95,6 +97,24 @@ export default (players, gameboards, onDone) => {
     return draggableShip;
   };
 
+  const loadShipGenerator = (length) => {
+    const shipGenerator = document.createElement("div");
+    shipGenerator.className = "ship-generator";
+
+    const shipCount = document.createElement("span");
+    shipGenerator.appendChild(shipCount);
+    shipCount.textContent = length;
+
+    const rotateButton = document.createElement("button");
+    shipGenerator.appendChild(rotateButton);
+    const rotateButtonImage = document.createElement("img");
+    rotateButton.appendChild(rotateButtonImage);
+    rotateButtonImage.src = rotateImage;
+    
+    return shipGenerator;
+  }
+
+  content.appendChild(loadShipGenerator(4));
   content.appendChild(createDraggableShip(4, false));
 
   return content;
