@@ -40,12 +40,11 @@ export default (players, gameboards, onDone) => {
       draggableShip.appendChild(shipCell);
     }
 
-    const rect = draggableShip.getBoundingClientRect();
-    let prevMouseX, prevMouseY;
+    let offsetX, offsetY;
 
     draggableShip.addEventListener("mousedown", (e) => {
-      prevMouseX = draggableShip.getBoundingClientRect() - e.clientX;
-      prevMouseY = e.clientY;
+      offsetX = parseInt(draggableShip.style.left || 0) - e.clientX;
+      offsetY = parseInt(draggableShip.style.top || 0) - e.clientY;
 
       document.addEventListener("mousemove", dragMouseMove);
       document.addEventListener("mouseup", dragMouseUp);
@@ -53,18 +52,15 @@ export default (players, gameboards, onDone) => {
 
     const dragMouseMove = (e) => {
       draggableShip.style.left = clamp(
-        draggableShip.offsetLeft + e.clientX - prevMouseX,
+        e.clientX + offsetX,
         0,
         window.innerWidth - draggableShip.offsetWidth,
-      );
+      ) + "px";
       draggableShip.style.top = clamp(
-        draggableShip.offsetTop + e.clientY - prevMouseY,
+        e.clientY + offsetY,
         0,
         window.innerHeight - draggableShip.offsetHeight,
-      );
-
-      prevMouseX = e.clientX;
-      prevMouseY = e.clientY;
+      ) + "px";
     };
 
     const dragMouseUp = () => {
