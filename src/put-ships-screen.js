@@ -40,27 +40,47 @@ export default (players, gameboards, onDone) => {
       draggableShip.appendChild(shipCell);
     }
 
-    let offsetX, offsetY;
+    let offsetX, offsetY, boardRect;
 
     draggableShip.addEventListener("mousedown", (e) => {
       offsetX = parseInt(draggableShip.style.left || 0) - e.clientX;
       offsetY = parseInt(draggableShip.style.top || 0) - e.clientY;
+
+      boardRect = playerBoard.getBoundingClientRect();
 
       document.addEventListener("mousemove", dragMouseMove);
       document.addEventListener("mouseup", dragMouseUp);
     });
 
     const dragMouseMove = (e) => {
-      draggableShip.style.left = clamp(
-        e.clientX + offsetX,
-        0,
-        window.innerWidth - draggableShip.offsetWidth,
-      ) + "px";
-      draggableShip.style.top = clamp(
-        e.clientY + offsetY,
-        0,
-        window.innerHeight - draggableShip.offsetHeight,
-      ) + "px";
+      draggableShip.style.left =
+        clamp(
+          e.clientX + offsetX,
+          0,
+          window.innerWidth - draggableShip.offsetWidth,
+        ) + "px";
+      draggableShip.style.top =
+        clamp(
+          e.clientY + offsetY,
+          0,
+          window.innerHeight - draggableShip.offsetHeight,
+        ) + "px";
+
+      if (
+        e.clientX + offsetX >= boardRect.left - 25 &&
+        e.clientX + offsetX <= boardRect.left + 475 &&
+        e.clientY + offsetY >= boardRect.top - 25 &&
+        e.clientY + offsetY <= boardRect.top + 525 - length * 50
+      ) {
+        draggableShip.style.left =
+          Math.round((e.clientX + offsetX - boardRect.left) / 50) * 50 +
+          boardRect.left +
+          "px";
+        draggableShip.style.top =
+          Math.round((e.clientY + offsetY - boardRect.top) / 50) * 50 +
+          boardRect.top +
+          "px";
+      }
     };
 
     const dragMouseUp = () => {
