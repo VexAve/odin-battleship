@@ -59,7 +59,7 @@ class Gameboard {
     );
   }
 
-  addShip(ship) {
+  canAddShip(ship) {
     if (ship.length < 1 || ship.length > 4) {
       throw new Error("Ship length must be between 1 and 4.");
     } else if (this.unplacedShips[ship.length] <= 0) {
@@ -68,10 +68,14 @@ class Gameboard {
       throw new Error("Ship must be within bounds.");
     } else if (this.placedShips.some((current) => ship.isTouching(current))) {
       throw new Error("Ships can't touch each other.");
-    } else {
-      this.unplacedShips[ship.length]--;
-      this.placedShips.push(ship);
     }
+  }
+
+  addShip(ship) {
+    this.canAddShip(ship);
+
+    this.unplacedShips[ship.length]--;
+    this.placedShips.push(ship);
   }
 
   removeShip(ship) {
