@@ -49,9 +49,13 @@ export default (players, gameboards, onDone) => {
 
     let vertical = false;
 
-    const createDraggableShip = () => {
+    const createDraggableShip = (xPos, yPos) => {
       const draggableShip = document.createElement("div");
       draggableShip.className = "ship";
+
+      draggableShip.style.left = xPos + "px";
+      draggableShip.style.top = yPos + "px";
+
       for (let i = 0; i < length; i++) {
         const shipCell = document.createElement("div");
         shipCell.className = "ship-cell";
@@ -68,8 +72,8 @@ export default (players, gameboards, onDone) => {
         mouseMoved = false;
 
       const startDragging = (e) => {
-        offsetX = parseInt(draggableShip.style.left || 0) - e.clientX;
-        offsetY = parseInt(draggableShip.style.top || 0) - e.clientY;
+        offsetX = parseInt(draggableShip.style.left) - e.clientX;
+        offsetY = parseInt(draggableShip.style.top) - e.clientY;
 
         boardRect = playerBoard.getBoundingClientRect();
 
@@ -133,7 +137,15 @@ export default (players, gameboards, onDone) => {
       return draggableShip;
     };
 
-    content.appendChild(createDraggableShip(4, false));
+    setTimeout(() => {
+      const generatorRect = shipGenerator.getBoundingClientRect();
+      shipGenerator.appendChild(
+        createDraggableShip(
+          generatorRect.left + (vertical ? 93 : (236 - length * 50) / 2),
+          generatorRect.top + (vertical ? (236 - length * 50) / 2 : 93),
+        ),
+      );
+    }, 0);
 
     return shipGenerator;
   };
