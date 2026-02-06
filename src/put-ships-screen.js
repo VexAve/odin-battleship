@@ -46,19 +46,30 @@ export default (players, gameboards, onDone) => {
       draggableShip.style.display = "flex";
     }
 
-    let offsetX, offsetY, boardRect;
+    let offsetX,
+      offsetY,
+      boardRect,
+      mouseMoved = false;
 
-    draggableShip.addEventListener("mousedown", (e) => {
+    const startDragging = (e) => {
       offsetX = parseInt(draggableShip.style.left || 0) - e.clientX;
       offsetY = parseInt(draggableShip.style.top || 0) - e.clientY;
 
       boardRect = playerBoard.getBoundingClientRect();
 
+      e.stopPropagation();
       document.addEventListener("mousemove", dragMouseMove);
-      document.addEventListener("mouseup", dragMouseUp);
-    });
+      document.addEventListener("mousedown", stopDragging);
+    };
+
+    draggableShip.addEventListener("mousedown", startDragging, { once: true });
 
     const dragMouseMove = (e) => {
+      if (!mouseMoved) {
+        document.addEventListener("mouseup", stopDragging);
+        mouseMoved = true;
+      }
+
       draggableShip.style.left =
         clamp(
           e.clientX + offsetX,
@@ -74,9 +85,11 @@ export default (players, gameboards, onDone) => {
 
       if (
         e.clientX + offsetX >= boardRect.left - 25 &&
-        e.clientX + offsetX <= boardRect.left + 525 - (vertical ? 1 : length) * 50 &&
+        e.clientX + offsetX <=
+          boardRect.left + 525 - (vertical ? 1 : length) * 50 &&
         e.clientY + offsetY >= boardRect.top - 25 &&
-        e.clientY + offsetY <= boardRect.top + 525 - (vertical ? length : 1) * 50
+        e.clientY + offsetY <=
+          boardRect.top + 525 - (vertical ? length : 1) * 50
       ) {
         draggableShip.style.left =
           Math.round((e.clientX + offsetX - boardRect.left) / 50) * 50 +
@@ -89,9 +102,14 @@ export default (players, gameboards, onDone) => {
       }
     };
 
-    const dragMouseUp = () => {
+    const stopDragging = () => {
+      mouseMoved = false;
       document.removeEventListener("mousemove", dragMouseMove);
-      document.removeEventListener("mouseup", dragMouseUp);
+      document.removeEventListener("mousedown", stopDragging);
+      document.removeEventListener("mouseup", stopDragging);
+      draggableShip.addEventListener("mousedown", startDragging, {
+        once: true,
+      });
     };
 
     return draggableShip;
@@ -110,9 +128,9 @@ export default (players, gameboards, onDone) => {
     const rotateButtonImage = document.createElement("img");
     rotateButton.appendChild(rotateButtonImage);
     rotateButtonImage.src = rotateImage;
-    
+
     return shipGenerator;
-  }
+  };
 
   content.appendChild(loadShipGenerator(0, 4));
   content.appendChild(createDraggableShip(4, false));
